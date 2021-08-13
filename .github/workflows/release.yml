@@ -1,0 +1,29 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - id: prep
+        run: |
+          echo ::set-output name=version::$(jq .version -r package.json)
+      - uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: |
+            ghcr.io/skolorna/opengraph:${{ steps.prep.outputs.version }}
+            ghcr.io/skolorna/opengraph:latest
