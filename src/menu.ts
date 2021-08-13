@@ -14,8 +14,7 @@ export function templateMenuImage(data: IMenu): string {
 		<head>
 			<link rel="preconnect" href="https://fonts.googleapis.com">
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-			<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
-			<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"> 
+			<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet"> 
 			<style>
 				body {
 					margin: 0;
@@ -33,6 +32,14 @@ export function templateMenuImage(data: IMenu): string {
 					z-index: 1;
 				}
 
+				.emoji {
+					font-size: 120px;
+					line-height: 1;
+					position: absolute;
+					left: 80px;
+					bottom: 80px;
+				}
+
 				.logo {
 					font: 500 40px/1 "Space Grotesk", sans-serif;
 					letter-spacing: -0.01em;
@@ -41,20 +48,11 @@ export function templateMenuImage(data: IMenu): string {
 					bottom: 80px;
 					right: 80px;
 				}
-
-				.ascii {
-					font: 400 40px/1 "JetBrains Mono", monospace;
-					position: fixed;
-					bottom: 80px;
-					left: 80px;
-					white-space: nowrap;
-					color: #eee;
-				}
 			</style>
 		</head>
 		<body>
 			<h1>${data.title}</h1>
-			<span class="ascii">┬┴┬┴┤ ͜ʖ ͡°) ├┬┴┬┴</span>
+			<span class="emoji">🤌</span>
 			<span class="logo">Skolorna</span>
 		</body>
 	</html>`;
