@@ -6,6 +6,18 @@ on:
       - main
 
 jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - id: prep
+        run: |
+          echo ::set-output name=version::$(jq .version -r package.json)
+      - uses: ncipollo/release-action@v1
+        with:
+          tag: v${{ steps.prep.outputs.version }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
   docker:
     runs-on: ubuntu-latest
     permissions:
