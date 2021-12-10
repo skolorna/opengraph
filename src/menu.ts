@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 import puppeteer from "puppeteer";
 
-const { MENU_PROXY_ENDPOINT = "https://api-staging.skolorna.com/v1/mp" } =
+const { ODEN_ENDPOINT = "https://api-staging.skolorna.com/v0/oden" } =
   process.env;
 
 interface IMenu {
@@ -14,14 +14,14 @@ export function templateMenuImage(data: IMenu): string {
 		<head>
 			<link rel="preconnect" href="https://fonts.googleapis.com">
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-			<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet"> 
+			<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet"> 
 			<style>
 				body {
 					margin: 0;
 				}
 				
 				h1 {
-					font: 500 80px/1.1 "Space Grotesk", sans-serif;
+					font: 500 80px/1 "Inter", sans-serif;
 					letter-spacing: -0.022em;
 					margin: 0;
 					overflow-wrap: break-word;
@@ -41,10 +41,10 @@ export function templateMenuImage(data: IMenu): string {
 				}
 
 				.logo {
-					font: 500 40px/1 "Space Grotesk", sans-serif;
-					letter-spacing: -0.01em;
+					font: 500 40px/1 "Inter", sans-serif;
+					letter-spacing: -0.022em;
 					color: #666;
-					position: fixed;
+					position: absolute;
 					bottom: 80px;
 					right: 80px;
 				}
@@ -59,15 +59,13 @@ export function templateMenuImage(data: IMenu): string {
 }
 
 export async function generateMenuImage(menu: string): Promise<Buffer | null> {
-  const res = await fetch(
-    `${MENU_PROXY_ENDPOINT}/menus/${encodeURIComponent(menu)}`
-  );
+  const res = await fetch(`${ODEN_ENDPOINT}/menus/${encodeURIComponent(menu)}`);
 
   if (res.status === 404) {
     return null;
   }
 
-  const data: IMenu = await res.json();
+  const data = (await res.json()) as IMenu;
 
   const browser = await puppeteer.launch({
     args: [

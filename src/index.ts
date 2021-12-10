@@ -1,5 +1,5 @@
 import fastify from "fastify";
-import { generateMenuImage } from "./menu";
+import { generateMenuImage } from "./menu.js";
 
 const server = fastify();
 
@@ -23,7 +23,7 @@ server.get<{
 });
 
 server.get("/health", async (_req, res) => {
-  return res.header("cache-control", "no-cache").send("OK!");
+  return res.header("cache-control", "no-store").send("OK!");
 });
 
 server.listen(8000, "0.0.0.0", (err, address) => {
