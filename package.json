@@ -1,9 +1,10 @@
 {
   "name": "opengraph",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "main": "dist/index.js",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "start": "node .",
@@ -11,7 +12,6 @@
   },
   "devDependencies": {
     "@types/node": "^16.11.12",
-    "@types/node-fetch": "^3.0.3",
     "prettier": "^2.4.1",
     "typescript": "^4.5.3"
   },

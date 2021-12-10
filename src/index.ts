@@ -1,5 +1,5 @@
 import fastify from "fastify";
-import { generateMenuImage } from "./menu";
+import { generateMenuImage } from "./menu.js";
 
 const server = fastify();
 
