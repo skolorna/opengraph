@@ -1,8 +1,9 @@
 import fetch from "node-fetch";
 import puppeteer from "puppeteer";
 
-const { ODEN_ENDPOINT = "https://api.skolorna.com/v0/oden" } =
-  process.env;
+const { ODEN_ENDPOINT = "https://api.skolorna.com/v0/oden" } = process.env;
+
+const USER_AGENT = "skolorna/opengraph";
 
 interface IMenu {
   title: string;
@@ -59,7 +60,14 @@ export function templateMenuImage(data: IMenu): string {
 }
 
 export async function generateMenuImage(menu: string): Promise<Buffer | null> {
-  const res = await fetch(`${ODEN_ENDPOINT}/menus/${encodeURIComponent(menu)}`);
+  const res = await fetch(
+    `${ODEN_ENDPOINT}/menus/${encodeURIComponent(menu)}`,
+    {
+      headers: {
+        "user-agent": USER_AGENT,
+      },
+    }
+  );
 
   if (res.status === 404) {
     return null;

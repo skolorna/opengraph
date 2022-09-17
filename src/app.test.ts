@@ -20,7 +20,13 @@ test("menu thumbnails", async (t) => {
     url: "/menus/ef85d803-3451-5479-a9c2-54d103c76b2f",
   });
 
-  t.assert(response.statusCode === 200);
-  t.assert(response.headers["cache-control"] === "max-age=86400");
-  t.assert(response.headers["content-type"] === "image/png");
+  t.assert(response.statusCode === 200, "status is ok");
+  t.assert(
+    response.headers["cache-control"] === "max-age=86400",
+    "cache control is set"
+  );
+  t.assert(
+    response.headers["content-type"] === "image/png",
+    "content type is set"
+  );
 });
