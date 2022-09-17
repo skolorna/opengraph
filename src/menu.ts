@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 import puppeteer from "puppeteer";
 
-const { ODEN_ENDPOINT = "https://api-staging.skolorna.com/v0/oden" } =
+const { ODEN_ENDPOINT = "https://api.skolorna.com/v0/oden" } =
   process.env;
 
 interface IMenu {
